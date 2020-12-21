@@ -1,0 +1,39 @@
+<!-- START ACTIVATE -->
+<section class="login pt-5 pb-5" id="CustomerLoginForm">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-lg-6 pb-5">
+                <div class="page__title">
+                    <h1>{{ 'customer.activate_account.title' | t }}</h1>
+                    <!-- start login input fields -->
+                    <div class="pt-3 pb-5">
+                        {% form 'activate_customer_password' %}
+                            {{ form.errors | default_errors }}
+
+                            <div class="input-group pb-3">
+                                <label for="email">{{ 'customer.activate_account.password' | t }}</label>
+                                <input type="password" value="" name="customer[password]" id="CustomerPassword" placeholder="{{ 'customer.activate_account.password' | t }}">
+                            </div>
+
+
+                                <div class="input-group pb-3">
+                                    <label for="password">{{ 'customer.activate_account.password_confirm' | t }}</label>
+                                    <input type="password" value="" name="customer[password_confirmation]" id="CustomerPasswordConfirmation" class="input-full" placeholder="{{ 'customer.activate_account.password_confirm' | t }}">
+                                </div>
+
+
+                            <div class="cta">
+                                <input type="submit" class="btn btn-primary" value="{{ 'customer.activate_account.submit' | t }}">
+                            </div>
+                        {%  endform %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- END ACTIVATE -->
+
+

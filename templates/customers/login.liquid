@@ -1,0 +1,100 @@
+<!-- START LOGIN -->
+<section class="login pt-5 pb-5" id="CustomerLoginForm">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg-6 pb-5">
+        <div class="page__title">
+          <h1>Log in</h1>
+          <!-- start login input fields -->
+          <div class="pt-3 pb-5">
+            {% form 'customer_login' %}
+            <div class="input-group pb-3">
+              <label for="email">{{ 'customer.login.email' | t }}</label>
+              <input  type="email" name="customer[email]" id="CustomerEmail" class="input-full{% if form.errors
+                contains 'email' %} error{% endif %}" placeholder="{{ 'customer.login.email' | t }}" autocorrect="off"
+                      autocapitalize="off" autofocus
+                      data-parsley-required="true"
+                      data-parsley-type="email"><br>
+
+            </div>
+
+            {% if form.password_needed %}
+            <div class="input-group pb-3">
+              <label for="password">{{ 'customer.login.password' | t }}</label>
+              <input type="password" value="" name="customer[password]" id="CustomerPassword" class="input-full{% if form.errors contains 'password' %} error{% endif %}" placeholder="{{ 'customer.login.password' | t }}"
+                     data-parsley-required="true">
+            </div>
+            {% endif %}
+
+            <div class="cta">
+              <input type="submit" class="btn btn-primary" value="{{ 'customer.login.sign_in' | t }}">
+            </div>
+
+              {{ form.errors | default_errors }}
+
+            {%  endform %}
+          </div>
+          <!-- end login input fields -->
+          <a href="#recover" id="RecoverPassword">Did you forget your password?</a>
+        </div>
+      </div>
+
+      <!-- start sign in fields -->
+
+      <div class="col-12 col-lg-6 pb-5">
+        <h2>Sign in</h2>
+        <p>If you do not have a Quality Blanks user account yet,
+          use this option to access the registration form.
+          We ask you for the essential information to facilitate the purchasing process.</p>
+        <div class="cta">
+          <a href="/account/register" class="btn btn-primary col-12 col-lg-8">Create Account</a>
+        </div>
+      </div>
+
+      <!-- end sign in fields -->
+    </div>
+  </div>
+</section>
+
+<!-- END LOGIN -->
+
+
+
+
+<!-- START RECOVER -->
+<section class="recover pt-5 pb-5 not-visible" id="RecoverPasswordForm">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg-6 pb-5">
+        <div class="page__title">
+          <h1>Did you forget your password?</h1>
+          <p>If you have forgotten your password, please provide your email address and we will send you
+            an email with instructions on how to request it again.</p>
+          <!-- start recover fields -->
+          <div class="pt-3 pb-5">
+            {% form 'recover_customer_password' , id: "recoverpassword"%}
+            <div class="input-group pb-3">
+              <label for="email">{{ 'customer.login.email' | t }}</label>
+              <input  type="email" name="customer[email]" id="CustomerEmail" class="input-full{% if form.errors
+                contains 'email' %} error{% endif %}" placeholder="{{ 'customer.login.email' | t }}" autocorrect="off"
+                      autocapitalize="off" autofocus
+                      data-parsley-required="true"
+                      data-parsley-type="email"><br>
+            </div>
+            <div class="cta">
+              <input type="submit" class="btn btn-primary" value="Retrieve password"  id="">
+            </div>
+              {{ form.errors | default_errors }}
+            {%  endform %}
+          </div>
+          <!-- end recover fields -->
+          <a href="#" id="HideRecoverPasswordLink">Log in</a>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- END RECOVER -->

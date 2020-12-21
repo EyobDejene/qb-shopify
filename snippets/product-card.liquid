@@ -1,0 +1,37 @@
+<!-- PRODUCT ITEM -->
+<div class="col-6 col-lg-3 col-md-4 pt-3  pt-lg-5 pt-md-5 pr-lg-3 pr-md-3">
+    <div class="item product">
+        <div class="product__imageWrap">
+            <a href="{{ product.url }}" title="{{ product.title }}">
+                                        <span class="product__image--first multiple">
+                                            <img src="{{ product.images[0] | product_img_url: "1536x2048" }}" alt="{{
+                                            product.title }}" title="{{ product.title }}"></span>
+                <span class="product__image--second multiple"><img
+                            src="{{ product.images[1] | product_img_url: "1536x2048" }}" width="100%"></span>
+            </a>
+        </div>
+        <div class="product__info">
+            <div class="product__overlay">
+                <div class="align align-100">
+                    <div class="align-middle">
+                        <ul class="product__variants">
+                            <li><a href="https://qualityblanks.com/collections/longsleeves/products/qb51-longsleeve-polo-black"></a></li>
+                            <li><a href="https://qualityblanks.com/collections/longsleeves/products/qb51-longsleeve-polo-burgundy-red"></a></li>
+                            <li><a href="https://qualityblanks.com/collections/longsleeves/products/qb51-longsleeve-polo-dark-sapphire"></a></li>
+                            <li><a href="https://qualityblanks.com/collections/longsleeves/products/qb51-longsleeve-polo-dark-teal"></a></li>
+                            <li><a href="https://qualityblanks.com/collections/longsleeves/products/qb51-longsleeve-polo-white"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="product__inner">
+              <!--  <a href="https://www.baskets-store.com/nl/stussy-bottlecap-tee-white.html" title="QB23"
+                   class="product__style">{{ product.brand }}</a> -->
+                <a href="https://www.baskets-store.com/nl/stussy-bottlecap-tee-white.html" title="{{ product.title }}" class="product__title">{{ product.title }}</a>
+                <div class="product__price"><span class="product__new-price"><span class="product__currency">{{
+                            cart.currency.symbol }}</span>{{ product.price | money_without_currency}}</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PRODUCT ITEM -->

@@ -1,0 +1,243 @@
+
+<section class="account pt-5 pb-5">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg-3 pb-5 pb-lg-0">
+        <aside>
+          <h2>Hello {{ customer.first_name }}</h2>
+          <ul>
+            <li><a href="#" class="active"data-page="account-link-information">Account information</a></li>
+            <li><a href="#" class="" data-page="account-link-orders">My orders</a></li>
+            <li><a href="#" class="" data-page="account-link-delivery">Delivery Adress</a></li>
+            <li><a href="#" class="" data-page="account-link-newsletter">Newsletter</a></li>
+            <li><a href="/account/logout">Logout</a></li>
+          </ul>
+        </aside>
+      </div>
+
+
+      <!-- START ACCOUNT SECTION -->
+      <div class="col-12 col-lg-9 pt-5 pt-lg-0 page" data-page="account-link-information">
+        <h1>Account information</h1>
+        <form action="" method="" class="pt-3 pb-5">
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="input-group pb-3">
+                <label for="firstname"> {{ 'customer.register.first_name' | t }}</label>
+                <input type="text"
+                       name="customer[first_name]"
+                       id="FirstName"
+                       placeholder="{{ 'customer.register.first_name' | t }}"
+                       value="{{ customer.first_name }}"
+                       {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
+                <br>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6">
+              <div class="input-group pb-3">
+                <label for="lastname">{{ 'customer.register.last_name' | t }}</label>
+                <input type="text"
+                       name="customer[last_name]"
+                       id="LastName"
+                       placeholder="{{ 'customer.register.last_name' | t }}"
+                       value="{{ customer.last_name }}"
+                       {% if form.first_name %}value="{{ form.last_name }}"{% endif %}>
+              </div>
+            </div>
+          </div>
+          <div class="input-group pb-3">
+            <label for="email">{{ 'contact.form.email' | t }}</label>
+            <input type="email" disabled name="email" id="email" value="{{ customer.email }}" placeholder="email">
+          </div>
+
+          <div class="input-group pb-3">
+            <label for="phone">{{ 'contact.form.phone' | t }}</label>
+            <input type="tel" name="phone" id="phone" value="{{ customer.phone }}" placeholder="phone">
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="input-group pb-3">
+                <label for="password">{{ 'customer.reset_password.password' | t }}</label>
+                <input type="password" value="" name="customer[password]" id="ResetPassword" class="input-full{% if form.errors contains 'password' %} error{% endif %}" placeholder="{{ 'customer.reset_password.password' | t }}">
+              </div>
+            </div>
+            <div class="col-12 col-lg-6">
+              <div class="input-group pb-3">
+                <label for="password__confirm">{{ 'customer.reset_password.password_confirm' | t }}</label>
+                <input type="password" value="" name="customer[password_confirmation]" id="PasswordConfirmation" class="input-full{% if form.errors contains 'password_confirmation' %} error{% endif %}" placeholder="{{ 'customer.reset_password.password_confirm' | t }}">
+
+              </div>
+            </div>
+          </div>
+
+          <div class="cta">
+            <input type="submit" class="btn btn-primary col-6 " value="save">
+          </div>
+        </form>
+      </div>
+      <!-- END ACCOUNT SECTION -->
+
+
+      <!-- START  ORDERS SECTION -->
+
+
+      <div class="col-12 col-lg-9 pt-5 pt-lg-0 page not-visible" data-page="account-link-orders">
+        <h1>My orders</h1>
+
+        <table>
+          <tr>
+            <th>Order</th>
+            <th>Date</th>
+            <th>Shipping</th>
+            <th class="d-none d-lg-table-cell">Order total</th>
+            <th>Status</th>
+            <th>&nbsp;</th>
+          </tr>
+
+          <!-- start product row -->
+          {% for orders in customer.orders %}
+            <tr>
+              <td>{{ order.order_number }}</td>
+              <td>{{ order.created_at }}</td>
+              <td>{{ order.location }}</td>
+              <td class="d-none d-lg-table-cell">{{ order.total_price | money_with_currency }}</td>
+              <td>{{ order.fulfillment_status }}</td>
+              <td><div class="cta pb-3"><a href="{{ order.order_status_url }}" class="btn btn-primary">View</a></div></td>
+            </tr>
+          {% endfor %}
+
+
+          <!-- end product row -->
+
+        </table>
+
+
+
+      </div>
+
+
+      <!-- END ORDERS SECTION -->
+
+
+
+      <!-- START DELIVERY SECTION -->
+      <div class="col-12 col-lg-9 pt-5 pt-lg-0 page not-visible" data-page="account-link-delivery">
+        <h1>Delivery Address</h1>
+        <div class="pt-3 pb-5">
+          {% form 'customer_address', customer.new_address %}
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="input-group pb-3">
+                <label for="firstname">{{ 'customer.addresses.first_name' | t }}</label>
+                <input type="text" id="AddressFirstNameNew" name="address[first_name]" value="{{ customer_address.first_name }}"
+                       autocomplete="given-name"  data-parsley-required="true"><br>
+              </div>
+            </div>
+            <div class="col-12 col-lg-6">
+              <div class="input-group pb-3">
+                <label for="lastname">{{ 'customer.addresses.last_name' | t }}</label>
+                <input type="text" id="AddressLastNameNew" name="address[last_name]" value="{{ customer_address.last_name }}"
+                       autocomplete="family-name"  data-parsley-required="true">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="input-group pb-3">
+                <label for="AddressZipNew">{{ 'customer.addresses.zip' | t }}</label>
+                <input type="text" id="AddressZipNew" name="address[zip]" value="{{ form.zip }}"
+                       autocapitalize="characters" autocomplete="postal-code"  data-parsley-required="true"><br>
+              </div>
+            </div>
+            <div class="col-12 col-lg-4">
+              <div class="input-group pb-3">
+                <label for="AddressAddress1New">{{ 'customer.addresses.address1' | t }}</label>
+                <input type="text" id="AddressAddress1New" name="address[zip]" value="{{ form.address1 }}"
+                       autocapitalize="characters" autocomplete="postal-code"  data-parsley-required="true"><br>
+              </div>
+            </div>
+            <div class="col-12 col-lg-2">
+              <div class="input-group pb-3">
+                <label for="AddressAddress2New">{{ 'customer.addresses.address2' | t }}</label>
+                <input type="text" id="AddressAddress2New" name="address[address1]" value="{{ form.address2 }}"
+                       autocomplete="street-address address-line1" data-parsley-required="true">
+              </div>
+            </div>
+          </div>
+            <div class="row">
+            <div class="col-12 col-lg-6">
+              <div class="input-group pb-3">
+                <label for="city">{{ 'customer.addresses.city' | t }}</label>
+                <input type="text" id="AddressCityNew" name="address[city]" value="{{ form.city }}"
+                       autocomplete="address-level2" data-parsley-required="true"><br>
+              </div>
+            </div>
+              <div class="col-12 col-lg-6">
+                <div class="input-group pb-3">
+                  <label for="AddressProvinceNew">{{ 'customer.addresses.province' | t }}</label>
+                  <input type="text" id="AddressCityNew" name="address[province]" value="{{ form.province  }}"
+                         autocomplete="address-level2" data-parsley-required="true">
+                </div>
+              </div>
+            </div>
+          <div class="row">
+            <div class="col-12 col-lg-12">
+              <div class="input-group pb-3">
+                <div class="selector col-12 p-0">
+                  <label for="country">{{ 'customer.addresses.country' | t }}</label>
+                  <select class="custom__select" id="AddressCountryNew" name="address[country]" data-default="{{ form.country }}" autocomplete="country"  data-parsley-required-message="You must select at least one option.">{{
+                    all_country_option_tags
+                    }}</select>
+
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="cta">
+            <input type="submit" class="btn btn-primary col-6 " value="save">
+          </div>
+          {%  endform %}
+        </div>
+      </div>
+
+      <!-- END DELIVERY SECTION -->
+
+
+      <!-- START NEWSLETTER SECTION -->
+      <div class="col-12 col-lg-9 pt-5 pt-lg-0 page not-visible" data-page="account-link-newsletter">
+        <h1>Newsletter</h1>
+        <form action="" method="" class="pt-3 pb-5">
+          <label>NEWSLETTER SUBSCRIPTION</label>
+          <div class="input-group">
+            <div class="group">
+              <input type="checkbox" name="id" value="0" id="newsletter" class="field__item">
+              <label for="newsletter" class="checkbox__label"></label>
+              <label for="newsletter" class="field__item">
+                <p>I would like to receive personal commercial communications from Quality Blanks by email.</p>
+              </label>
+            </div>
+          </div>
+
+          <div class="cta">
+            <input type="submit" class="btn btn-primary col-6 " value="save">
+          </div>
+        </form>
+
+      </div>
+
+
+      <!-- END NEWSLETTER SECTION -->
+
+
+
+
+    </div>
+  </div>
+</section>
+
+
+

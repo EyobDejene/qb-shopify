@@ -1,0 +1,80 @@
+<!-- START REGISTER -->
+<section class="register pt-5 pb-5">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg-7 pb-5">
+        <div class="page__title">
+          <h1>Write your personal information</h1>
+          <!-- start register input fields -->
+          <div class="pt-3 pb-5">
+            {% form 'create_customer' %}
+            <div class="input-group pb-3">
+              <label for="email">{{ 'customer.register.email' | t }}</label>
+              <input type="email"
+                     name="customer[email]"
+                     id="Email"
+                     class="{% if form.errors contains 'email' %}input-error is-invalid{% endif %}"
+                     placeholder="{{ 'customer.register.email' | t }}"
+                     value="{% if form.email %}{{ form.email }}{% endif %}"
+                     spellcheck="false"
+                     autocomplete="off"
+                     autocapitalize="off"
+                     data-parsley-required="true"
+                     data-parsley-type="email">
+              <br>
+            </div>
+            <div class="row pb-3">
+              <div class="input-group pb-3 col-12 col-lg-6">
+                <label for="password">{{ 'customer.register.password' | t }}</label>
+                <input type="password"
+                       name="customer[password]"
+                       id="CreatePassword"
+                       class="{% if form.errors contains 'password' %}input-error is-invalid{% endif %}"
+                       placeholder="{{ 'customer.register.password' | t }}"
+                       data-parsley-required="true">
+              </div>
+              <div class="input-group pb-3 col-12 col-lg-6">
+                <label for="password__repeat">Repeat Password</label>
+                <input type="password" value="" name="customer[password_confirmation]" id="customer_password_confirmation" class="text"
+                       data-parsley-equalto="#CreatePassword"
+                       data-parsley-required="true"/>
+              </div>
+            </div>
+
+           <div class="input-group">
+             <div class="group">
+               <input type="checkbox" name="id" value="0" id="newsletter" class="field__item"
+                      data-parsley-required="true">
+               <label for="newsletter" class="checkbox__label"></label>
+               <label for="newsletter" class="field__item">
+                 <p>I would like to receive personal commercial communications from Quality Blanks by email.</p>
+               </label>
+             </div>
+            </div>
+
+            <div class="input-group">
+              <div class="group">
+                <input type="checkbox" name="policy" value="0" id="policy" class="field__item "
+                       data-parsley-required="true">
+                <label for="policy" class="checkbox__label" data-parsley-required="true"></label>
+                <label for="policy" class="field__item">
+                  <p>I have read and understood the Privacy and Cookie Policy .</p>
+                </label>
+              </div>
+            </div>
+
+            <div class="cta">
+              <input type="submit" class="btn btn-primary" value="{{ 'customer.register.submit' | t }}">
+            </div>
+
+            {%  endform %}
+          </div>
+          <!-- end register input fields -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- END REGISTER -->

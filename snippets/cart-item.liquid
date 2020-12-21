@@ -1,0 +1,42 @@
+<!-- PRODUCT ITEM -->
+<tr>
+    <td>
+        <div class="cart__product">
+            <div class="product__imageWrap">
+                <a href="{{ item.url }}" title="Stussy Stussy Bottlecap Tee White">
+                                        <span class="product__image--first multiple">
+                                            <img src="{{ item.image | product_img_url: "1536x2048" }}" alt="{{ item.title }}" title="{{ item.title }}">
+                                        </span>
+                </a>
+            </div>
+        </div>
+    </td>
+    <td>
+        <div class="product__info">
+            <div class="product__inner">
+                <!--<a href="" title="QB23"class="product__style">QB24</a>-->
+                <a href="{{ item.url }}" title="{{ item.title }}" class="product__title">{{ item.title }}</a>
+                <div class="product__variant"><strong>Size:</strong>
+                    {% unless item.variant.title contains 'One' %}
+                        <span class="product__size">{{ item.variant.option1 }}</span>
+                    {% endunless %}
+                </div>
+            </div>
+        </div>
+
+    </td>
+    <td>
+        <div class="product__price"><span class="product__new-price"><span
+                        class="product__currency">{{ cart.currency.symbol }}</span>{{ item.price |
+                money_without_currency }}</span></div>
+    </td>
+    <td>
+        <input onchange="this.form.submit();" class="cart__qty-input product__quantity" type="number" name="updates[]"
+               id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0" pattern="[0-9]*">
+    </td>
+    <td class="d-none d-lg-table-cell d-md-table-cell">
+        <div class="product__totalprice"><span class="product__new-price"><span class="product__currency">{{ cart.currency.symbol }}</span>{{item.price | times:item.quantity | money_without_currency}}</span></div>
+    </td>
+    <td><a href="/cart/change?line={{ forloop.index }}&quantity=0" rel="{{ item.id }}" class="product__remove">x</a></td>
+</tr>
+<!-- END PRODUCT ITEM -->

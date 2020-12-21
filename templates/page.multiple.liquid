@@ -1,0 +1,40 @@
+<!-- START CONTENT -->
+<section class="category pt-5 pb-5">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-3 d-none d-lg-block">
+        <aside>
+          <h2>INFO</h2>
+          <ul>
+            <li><a href="/pages/contact"{%  if page.url == '/pages/contact' %}class="active"{% endif %}>Contact</a></li>
+            <li><a href="/pages/shipping"{%  if page.url == '/pages/shipping' %}class="active"{% endif %}>Shipping</a></li>
+            <li><a href="/pages/returns"{%  if page.url == '/pages/returns' %}class="active"{% endif
+              %}>Returns</a></li>
+            <li><a href="/pages/size-chart"{%  if page.url == '/pages/size-chart' %}class="active"{% endif
+              %}>Sizechart</a></li>
+            <li><a href="/pages/faq"{%  if page.url == '/pages/faq' %}class="active"{% endif %} >FAQ</a></li>
+          </ul>
+        </aside>
+      </div>
+      <div class="col-12 col-lg-9">
+        <article>
+          <header>
+            {% if page.title == "FAQ" %}
+               <h1 style="text-transform: uppercase">{{ page.title }}</h1>
+            {% else %}
+              <h1>{{ page.title | replace: '-', ' '}}</h1>
+            {% endif %}
+          </header>
+
+          <div class="article__content">
+
+            <p>{{ page.content | raw }}</p>
+
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- END CONTENT -->

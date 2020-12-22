@@ -54,26 +54,37 @@
 
         <div class="input__space">
           <input type="hidden" name="contact[tags]" value="newsletter">
-          <input type="email"
-                 name="contact[email]"
-                 id="Email"
-                 value="{% if customer.email != blank %}{{ customer.email }}{% endif %}"
-                 placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
-                 autocorrect="off"
-                 autocapitalize="off"
-                 data-parsley-type="email"
-                 data-parsley-required="true"
-                 data-parsley-errors-messages-enabled>
+          {% if form.posted_successfully?  %}
+            {{ 'general.newsletter_form.confirmation' | t }}
+            <div class="cta">
+              <button type="submit" disabled name="commit" id="Subscribe" class="btn btn-primary">
+                <span>{{ 'general.newsletter_form.submit' | t }}</span>
+              </button>
+            </div>
+          {%  else %}
+            <input type="email"
+                   name="contact[email]"
+                   id="Email"
+                   value=""
+                   placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
+                   autocorrect="off"
+                   autocapitalize="off"
+                   data-parsley-type="email"
+                   data-parsley-required="true"
+                   data-parsley-errors-messages-enabled>
+            <div class="cta">
+              <button type="submit" name="commit" id="Subscribe" class="btn btn-primary">
+                <span>{{ 'general.newsletter_form.submit' | t }}</span>
+              </button>
+            </div>
+          {% endif %}
+
         </div>
+
+
+        <br>
         {{ form.errors | default_errors }}
-      {% if form.posted_successfully? %}
-        <p>{{ 'general.newsletter_form.confirmation' | t }}</p>
-      {% endif %}
-        <div class="cta">
-          <button type="submit" name="commit" id="Subscribe" class="btn btn-primary">
-            <span>{{ 'general.newsletter_form.submit' | t }}</span>
-          </button>
-        </div>
+
 
       {% endform %}
 

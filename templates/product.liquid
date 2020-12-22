@@ -16,7 +16,7 @@
 
             {% for image in product.images %}
               <div class="col-6 p-0 pr-2 pb-2">
-                <img src="{{ image.src | product_img_url: '1536x2048' }}" class="img-fluid" alt="{{ product.title }}">
+                <img src="{{ image.src | product_img_url: '1536x2048' }}" class="img-fluid img-zoomable" alt="{{ product.title }}">
               </div>
             {% endfor %}
 
@@ -34,7 +34,8 @@
               {% for image in product.images %}
                 <div class="item d-flex align-items-center cover">
                   <div class="col-12 static p-0">
-                    <img src="{{ image.src | product_img_url: '1536x2048' }}" class="img-fluid" alt="{{ product.title }}">
+                    <img src="{{ image.src | product_img_url: '1536x2048' }}" class="img-fluid" alt="{{ product
+                    .title }}">
                   </div>
                 </div>
               {% endfor %}
@@ -183,3 +184,11 @@
 
 
 <!-- END PRODUCT DETAIL -->
+
+
+<script>
+  // Listen to images after DOM content is fully loaded
+  document.addEventListener('DOMContentLoaded', function () {
+    new Zooming().listen('.img-zoomable')
+  })
+</script>

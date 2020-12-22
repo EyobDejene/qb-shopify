@@ -663,94 +663,204 @@ function toggleRecover(){
  * account pages
  */
 
-let accountLinkAdress = document.querySelectorAll('.account aside li a');
-if(accountLinkAdress) {
-  for (let i = 0; i < accountLinkAdress.length; i++) {
-    accountLinkAdress[i].addEventListener('click', getSection);
-  }
-}
+// let accountLinkAdress = document.querySelectorAll('.account aside li a');
+// if(accountLinkAdress) {
+//   for (let i = 0; i < accountLinkAdress.length; i++) {
+//     accountLinkAdress[i].addEventListener('click', getSection);
+//   }
+// }
+//
+// function getSection(){
+//     let link = this.getAttribute('data-page');
+//     let pages = document.querySelectorAll('.account .page');
+//       for (let i = 0; i < accountLinkAdress.length; i++) {
+//         accountLinkAdress[i].classList.remove('active');
+//       }
+//     for (let i = 0; i < pages.length; i++) {
+//         pages[i].classList.remove('show');
+//         pages[i].classList.add('not-visible');
+//         if(link == pages[i].getAttribute('data-page')){
+//           pages[i].classList.add('show');
+//           this.classList.add('active');
+//         }
+//     }
+// }
 
-function getSection(){
-    let link = this.getAttribute('data-page');
-    let pages = document.querySelectorAll('.account .page');
-      for (let i = 0; i < accountLinkAdress.length; i++) {
-        accountLinkAdress[i].classList.remove('active');
-      }
-    for (let i = 0; i < pages.length; i++) {
-        pages[i].classList.remove('show');
-        pages[i].classList.add('not-visible');
-        if(link == pages[i].getAttribute('data-page')){
-          pages[i].classList.add('show');
-          this.classList.add('active');
-        }
-    }
-}
+
+
+
+
+
+
+
 
 /**
  * newsletter
  */
 $('form').parsley();
+
 window.Parsley.on('field:error', function() {
+  // This global callback will be called for any field that fails validation.
+    console.log('Validation failed for: ', this.$element);
+    this.$element.addClass('field-error');
+});
+
+
+window.Parsley.on('form:error', function() {
       // This global callback will be called for any field that fails validation.
-      console.log('Validation failed for: ', this.$element);
-      this.$element.addClass('field-error');
-    });
-
-    window.Parsley.on('field:success', function() {
-      // This global callback will be called for any field that fails validation.
-      console.log('Validation failed for: ', this.$element);
-      this.$element.removeClass('field-error');
-    });
+      console.log('Validation failed for: ', this.$element[0].innerText);
+      //let msg = this.$element[0].innerText;
+      Notiflix.Notify.Failure('Please check the marked fields');
+});
 
 
-$('#contact_form').submit(function(event) {
-    console.log('clicked');
-
-    var $form = $(this);
-    event.preventDefault();
-
-    window.Parsley.on('field:error', function() {
-      // This global callback will be called for any field that fails validation.
-      console.log('Validation failed for: ', this.$element);
-      this.$element.addClass('field-error');
-    });
-
-    window.Parsley.on('field:success', function() {
+window.Parsley.on('field:success', function() {
       // This global callback will be called for any field that fails validation.
       console.log('Validation failed for: ', this.$element);
       this.$element.removeClass('field-error');
     });
 
-    if ($form.parsley().isValid()) {
-
-      jQuery.ajax({
-        type: 'POST',
-        async: true,
-        url: $form.attr('action'),
-        data: $form.serialize(),
-        beforeSend: function() {
-          //$form.addClass('sending');
-          console.log('sending');
-        },
-        error: function(t) {
-          console.log(t);
-          //$form.addClass('sent');
-          console.log('sent error');
-          //$form.find('.errorMsg').fadeIn();
-        },
-        success: function(response) {
-          console.log('sent');
-          //$form.addClass('sent');
-          //$form.find('.successMsg').fadeIn();
-        }
-      });
-    }
-
-  });
 
 
 
 
+
+//
+
+// $('#customer_address').submit(function(event) {
+//     console.log('clicked');
+//
+//     var $form = $(this);
+//     event.preventDefault();
+//
+//     window.Parsley.on('field:error', function() {
+//       // This global callback will be called for any field that fails validation.
+//       console.log('Validation failed for: ', this.$element);
+//       this.$element.addClass('field-error');
+//     });
+//
+//     window.Parsley.on('field:success', function() {
+//       // This global callback will be called for any field that fails validation.
+//       console.log('Validation failed for: ', this.$element);
+//       this.$element.removeClass('field-error');
+//     });
+//
+//     if ($form.parsley().isValid()) {
+//
+//       jQuery.ajax({
+//         type: 'POST',
+//         async: true,
+//         url: $form.attr('action'),
+//         data: $form.serialize(),
+//         beforeSend: function() {
+//           //$form.addClass('sending');
+//           console.log('sending');
+//         },
+//         error: function(t) {
+//           console.log(t);
+//           //$form.addClass('sent');
+//           console.log('sent error');
+//           //$form.find('.errorMsg').fadeIn();
+//         },
+//         success: function(response) {
+//           console.log('sent');
+//           //$form.addClass('sent');
+//           //$form.find('.successMsg').fadeIn();
+//         }
+//       });
+//     }
+//
+//   });
+
+
+// check state of checkboxes
+let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+if(checkboxes) {
+  for (let i = 0; i < checkboxes.length; i++) {
+
+    checkboxes[i].addEventListener('change', function() {
+      console.log(this);
+      if (this.checked) {
+        this.value = true;
+      } else
+        this.value = false;
+    });
+  }
+}
+
+
+// notiflix
+Notiflix.Notify.Init({
+  width: '280px',
+  position: 'right-bottom', // 'right-top' - 'right-bottom' - 'left-top' - 'left-bottom' && v2.2.0 and the next versions => 'center-top' - 'center-bottom' - 'center-center'
+  distance: '10px',
+  opacity: 1,
+  borderRadius: '5px',
+  rtl: false,
+  timeout: 3000,
+  messageMaxLength: 110,
+  backOverlay: false,
+  backOverlayColor: 'rgba(0,0,0,0.5)',
+  plainText: true,
+  showOnlyTheLastOne: false,
+  clickToClose: false,
+  pauseOnHover: true, // v2.7.0 and the next versions
+
+  ID: 'NotiflixNotify',
+  className: 'notiflix-notify',
+  zindex: 4001,
+  useGoogleFont: false, // v2.2.0 and the next versions => has been changed as "false"
+  fontFamily: 'Quicksand',
+  fontSize: '13px',
+  cssAnimation: true,
+  cssAnimationDuration: 400,
+  cssAnimationStyle: 'fade', // 'fade' - 'zoom' - 'from-right' - 'from-top' - 'from-bottom' - 'from-left'
+  closeButton: false,
+  useIcon: true,
+  useFontAwesome: false,
+  fontAwesomeIconStyle: 'basic', // 'basic' - 'shadow'
+  fontAwesomeIconSize: '34px',
+
+  success: {
+    background: '#32c682',
+    textColor: '#fff',
+    childClassName: 'success',
+    notiflixIconColor: 'rgba(0,0,0,0.2)',
+    fontAwesomeClassName: 'fas fa-check-circle',
+    fontAwesomeIconColor: 'rgba(0,0,0,0.2)',
+    backOverlayColor: 'rgba(50,198,130,0.2)', // v2.2.0 and the next versions
+  },
+
+  failure: {
+    background: '#ff5549',
+    textColor: '#fff',
+    childClassName: 'failure',
+    notiflixIconColor: 'rgba(0,0,0,0.2)',
+    fontAwesomeClassName: 'fas fa-times-circle',
+    fontAwesomeIconColor: 'rgba(0,0,0,0.2)',
+    backOverlayColor: 'rgba(255,85,73,0.2)', // v2.2.0 and the next versions
+  },
+
+  warning: {
+    background: '#eebf31',
+    textColor: '#fff',
+    childClassName: 'warning',
+    notiflixIconColor: 'rgba(0,0,0,0.2)',
+    fontAwesomeClassName: 'fas fa-exclamation-circle',
+    fontAwesomeIconColor: 'rgba(0,0,0,0.2)',
+    backOverlayColor: 'rgba(238,191,49,0.2)', // v2.2.0 and the next versions
+  },
+
+  info: {
+    background: '#26c0d3',
+    textColor: '#fff',
+    childClassName: 'info',
+    notiflixIconColor: 'rgba(0,0,0,0.2)',
+    fontAwesomeClassName: 'fas fa-info-circle',
+    fontAwesomeIconColor: 'rgba(0,0,0,0.2)',
+    backOverlayColor: 'rgba(38,192,211,0.2)', // v2.2.0 and the next versions
+  },
+});
 
 
 

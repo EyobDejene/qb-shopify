@@ -2,16 +2,20 @@
 <div class="col-12 p-0">
     <div class="bottomMedia__asset">
         <div class="bottomMedia__title">
-            <h3 class="">QB FW20<br>THE GREAT OUTDOORS AWAITS</h3>
+            <h3 class="">{{ section.settings.image_title_1 }}</h3>
             <!--<div class="cta">-->
             <!--<a class="btn btn-secondary col-6 col-lg-3"-->
             <!--href="https://unsplash.com/photos/pgR4yBMjum8" target="_blank" role="button">view lookbook</a>-->
             <!--</div>-->
         </div>
-        <!--<img alt="Quality Blanks" class="img-fluid" src="https://cdn.webshopapp.com/shops/260322/files/338757935/image.jpg">-->
-        <video class="bottomMedia__video" playsinline="" loop="" muted="" autoplay="">
+
+        <img alt="Quality Blanks" class="img-fluid" src="{{  section.settings.image_1 | img_url: 'master' }}">
+
+
+       <!-- <video class="bottomMedia__video" playsinline="" loop="" muted="" autoplay="">
             <source src="https://cdn.shopify.com/s/files/1/0250/8090/files/Topbanner_video_W3_4_1080p.mp4?v=1606298422" type="video/mp4">
-        </video>
+        </video> -->
+
     </div>
 </div>
 <!-- END BOTTOM MEDIA ITEM -->

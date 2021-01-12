@@ -769,7 +769,7 @@ a#cart__menu:after {
 .offcanvas__inner{
     width: 100%;
     height: 100%;
-    padding: 3rem 1rem;
+    padding: 4rem 1rem;
     display: table;
 }
 
@@ -1562,9 +1562,13 @@ form input[type="checkbox"]:checked ~ .checkbox__label::before {
 }
 
 
-
 /** END ACCOUNT PAGE **/
 
+
+/** order page **/
+table tbody tr{
+    border:none;
+}
 
 
 

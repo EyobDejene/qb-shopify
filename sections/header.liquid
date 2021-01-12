@@ -1,12 +1,26 @@
 <!-- START HEADER -->
 <header class="header">
+
   <!-- start header usp -->
-  <div class="container-fluid pb-4">
-  <div class="header__usp col-12">
-  <p>Free worldwide shipping on all orders over 250 eur</p>
-  </div>
-  </div>
+{% if section.settings.announcement_bar %}
+  {%  if section.settings.home_page_only %}
+      {% if template.name == 'index' %}
+        <div class="container-fluid pb-4">
+        <div class="header__usp col-12">
+        <p>  {{ section.settings.message_text }}</p>
+        </div>
+        </div>
+  {% endif %}
+  {% else %}
+    <div class="container-fluid pb-4">
+      <div class="header__usp col-12">
+        <p style="color:{{ section.settings.color_text }}">  {{ section.settings.message_text }}</p>
+      </div>
+    </div>
+    {% endif %}
+
   <!-- end header usp -->
+{%  endif %}
 
   <nav class="header__navigation">
     <div class="mobile__menu d-block d-xl-none">
@@ -34,7 +48,7 @@
           <div class="accordion__content">
             <ul>
               {% for link in linklists.shop-menu.links %}
-                  <li><a href= "{{ link.url }}" class="strong">{{ link.title | downcase}}</a></li>
+                <li><a href="{{  link.url }}">{{  link.title }}</a></li>
               {% endfor %}
             </ul>
           </div>
@@ -59,12 +73,16 @@
 
 
         <!-- start list item -->
+
         <div class="accordion pt-2">
           <div class="accordion__title">
             <strong>Lookbook <span class="float-right">+</span></strong>
             <div class="accordion__content">
               <ul>
-                <li><a href="#">QB FW20</a></li>
+                {% for link in linklists.lookbook.links %}
+                    <li><a href="{{  link.url }}">{{  link.title }}</a></li>
+                {% endfor %}
+
               </ul>
             </div>
           </div>
@@ -98,13 +116,13 @@
 
         <ul class="shop__languages__currencies pt-2">
           <li>
-            <a href="/nl" class="active">NL</a>
-            <a href="/us" class="">US</a>
+            <!--<a href="/nl" class="active">NL</a>
+            <a href="/us" class="">US</a>-->
           </li>
           <li>
-            <a href="https://www.baskets-store.com/nl/session/currency/eur/" class="active">EUR</a>
+            <!--<a href="https://www.baskets-store.com/nl/session/currency/eur/" class="active">EUR</a>
             <a href="https://www.baskets-store.com/nl/session/currency/gbp/" class="">GBP</a>
-            <a href="https://www.baskets-store.com/nl/session/currency/usd/" class="">USD</a>
+            <a href="https://www.baskets-store.com/nl/session/currency/usd/" class="">USD</a>-->
           </li>
         </ul>
 
@@ -129,9 +147,9 @@
                 <div class="col-3">
                   {% for link in linklists.shop-menu.links %}
                     {%  if link.title == "SALE" %}
-                      <li><a href= "{{ link.url }}" class="strong sale">{{ link.title | downcase }}</a></li>
+                      <li><a href= "{{ link.url }}" class="sale">{{ link.title | downcase }}</a></li>
                     {% else %}
-                      <li><a href= "{{ link.url }}" class="strong">{{ link.title | downcase }}</a></li>
+                      <li><a href= "{{ link.url }}">{{ link.title | downcase }}</a></li>
                       {% endif %}
 
                   {% endfor %}
@@ -173,8 +191,10 @@
         </div>
       </li>
 
-      <li><a href="/pages/about"><span>+ </span>About</a></li>
-      <li><a href="/pages/lookbook"><span>+ </span>Lookbook</a></li>
+
+      {% for link in linklists.main-menu.links %}
+        <li><a href="{{ link.url }}"><span>+ </span>{{ link.title }}</a></li>
+      {% endfor %}
 
     </ul>
 
@@ -323,175 +343,7 @@
     "zh-TW": "標頭"
   },
   "settings": [
-    {
-      "type": "radio",
-      "id": "align_logo",
-      "label": {
-        "cs": "Zarovnání loga",
-        "da": "Logojustering",
-        "de": "Logo-Ausrichtung",
-        "en": "Logo alignment",
-        "es": "Alineación de logo",
-        "fi": "Logon tasaus",
-        "fr": "Alignement du logo",
-        "it": "Allineamento logo",
-        "ja": "ロゴアラインメント",
-        "ko": "로고 정렬",
-        "nb": "Logojustering",
-        "nl": "Logo-uitlijning",
-        "pl": "Wyrównanie logo",
-        "pt-BR": "Alinhamento do logotipo",
-        "pt-PT": "Alinhamento do logótipo",
-        "sv": "Logojustering",
-        "th": "การจัดวางโลโก้",
-        "tr": "Logo hizalaması",
-        "vi": "Căn chỉnh logo",
-        "zh-CN": "logo 对齐方式",
-        "zh-TW": "商標對齊"
-      },
-      "default": "left",
-      "options": [
-        {
-          "value": "left",
-          "label": {
-            "cs": "Doleva",
-            "da": "Venstre",
-            "de": "Links",
-            "en": "Left",
-            "es": "Izquierda",
-            "fi": "Vasen",
-            "fr": "Gauche",
-            "it": "Sinistra",
-            "ja": "左",
-            "ko": "왼쪽",
-            "nb": "Venstre",
-            "nl": "Links",
-            "pl": "Do lewej",
-            "pt-BR": "Esquerda",
-            "pt-PT": "Esquerda",
-            "sv": "Vänster",
-            "th": "ด้านซ้าย",
-            "tr": "Sol",
-            "vi": "Bên trái",
-            "zh-CN": "左侧",
-            "zh-TW": "左方"
-          }
-        },
-        {
-          "value": "center",
-          "label": {
-            "cs": "Na střed",
-            "da": "Centreret",
-            "de": "Mittig",
-            "en": "Centered",
-            "es": "Centrada",
-            "fi": "Keskitetty",
-            "fr": "Centré",
-            "it": "Centrato",
-            "ja": "中央揃え",
-            "ko": "센터 맞추기",
-            "nb": "Sentrert",
-            "nl": "Gecentreerd",
-            "pl": "Wyśrodkowane",
-            "pt-BR": "Centralizado",
-            "pt-PT": "Centrado",
-            "sv": "Centrera",
-            "th": "ตรงกลาง",
-            "tr": "Orta",
-            "vi": "Giữa",
-            "zh-CN": "居中",
-            "zh-TW": "置中"
-          }
-        }
-      ]
-    },
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": {
-        "cs": "Obrázek loga",
-        "da": "Logobillede",
-        "de": "Logo-Foto",
-        "en": "Logo image",
-        "es": "Logo",
-        "fi": "Logokuva",
-        "fr": "Image du logo",
-        "it": "Immagine del logo",
-        "ja": "ロゴ画像",
-        "ko": "로고 이미지",
-        "nb": "Logobilde",
-        "nl": "Afbeelding van logo",
-        "pl": "Obraz logo",
-        "pt-BR": "Imagem do logotipo",
-        "pt-PT": "Imagem do logótipo",
-        "sv": "Logobild",
-        "th": "รูปภาพโลโก้",
-        "tr": "Logo görseli",
-        "vi": "Hình ảnh logo",
-        "zh-CN": "logo 图片",
-        "zh-TW": "標誌圖片"
-      }
-    },
-    {
-      "type": "range",
-      "id": "logo_max_width",
-      "label": {
-        "cs": "Šířka vlastního loga",
-        "da": "Tilpasset logobredde",
-        "de": "Logobreite",
-        "en": "Custom logo width",
-        "es": "Ancho del logo personalizado",
-        "fi": "Mukautetun logon leveys",
-        "fr": "Largeur personnalisée du logo",
-        "it": "Larghezza logo personalizzato",
-        "ja": "ロゴの幅をカスタマイズする",
-        "ko": "사용자 지정 로고 폭",
-        "nb": "Tilpasset logobredde",
-        "nl": "Aangepaste logo-breedte",
-        "pl": "Niestandardowa szerokość logo",
-        "pt-BR": "Largura do logotipo personalizado",
-        "pt-PT": "Largura de logótipo personalizada",
-        "sv": "Anpassad logotypsbredd",
-        "th": "ความกว้างของโลโก้แบบกำหนดเอง",
-        "tr": "Özel logo genişliği",
-        "vi": "Chiều rộng logo tùy chỉnh",
-        "zh-CN": "自定义 logo 宽度",
-        "zh-TW": "自訂商標寬度"
-      },
-      "min": 50,
-      "max": 250,
-      "step": 5,
-      "unit": "px",
-      "default": 100
-    },
-    {
-      "type": "link_list",
-      "id": "main_linklist",
-      "label": {
-        "cs": "Nabídka",
-        "da": "Menu",
-        "de": "Menü",
-        "en": "Menu",
-        "es": "Menú",
-        "fi": "Valikko",
-        "fr": "Menu",
-        "it": "Menu",
-        "ja": "メニュー",
-        "ko": "메뉴",
-        "nb": "Meny",
-        "nl": "Menu",
-        "pl": "Menu",
-        "pt-BR": "Menu",
-        "pt-PT": "Menu",
-        "sv": "Meny",
-        "th": "เมนู",
-        "tr": "Menü",
-        "vi": "Menu",
-        "zh-CN": "菜单",
-        "zh-TW": "選單"
-      },
-      "default": "main-menu"
-    },
+
     {
       "type": "header",
       "content": {
@@ -520,7 +372,7 @@
     },
     {
       "type": "checkbox",
-      "id": "message",
+      "id": "announcement_bar",
       "label": {
         "cs": "Zobrazit oznámení",
         "da": "Vis meddelelse",
@@ -623,113 +475,10 @@
         "zh-CN": "在此处进行公告",
         "zh-TW": "在此公告資訊"
       }
-    },
-    {
-      "type": "url",
-      "id": "message_link",
-      "label": {
-        "cs": "Odkaz",
-        "da": "Link",
-        "de": "Link",
-        "en": "Link",
-        "es": "Enlace",
-        "fi": "Linkki",
-        "fr": "Lien",
-        "it": "Link",
-        "ja": "リンク",
-        "ko": "링크",
-        "nb": "Kobling",
-        "nl": "Link",
-        "pl": "Link",
-        "pt-BR": "Link",
-        "pt-PT": "Ligação",
-        "sv": "Länk",
-        "th": "ลิงก์",
-        "tr": "Bağlantı",
-        "vi": "Liên kết",
-        "zh-CN": "链接",
-        "zh-TW": "連結"
-      },
-      "info": {
-        "cs": "Volitelné",
-        "da": "Valgfri",
-        "de": "Optional",
-        "en": "Optional",
-        "es": "Opcional",
-        "fi": "Valinnainen",
-        "fr": "Facultatif",
-        "it": "Facoltativo",
-        "ja": "オプション",
-        "ko": "선택 사항",
-        "nb": "Valgfritt",
-        "nl": "Optioneel",
-        "pl": "Opcjonalnie",
-        "pt-BR": "Opcional",
-        "pt-PT": "Opcional",
-        "sv": "Valfritt",
-        "th": "ไม่จำเป็น",
-        "tr": "İsteğe bağlı",
-        "vi": "Không bắt buộc",
-        "zh-CN": "可选",
-        "zh-TW": "(選填)"
-      }
-    },
-    {
-      "type": "color",
-      "id": "color_bg",
-      "label": {
-        "cs": "Panel",
-        "da": "Bjælke",
-        "de": "Zeile",
-        "en": "Bar",
-        "es": "Barra",
-        "fi": "Palkki",
-        "fr": "Barre",
-        "it": "Barra",
-        "ja": "バー",
-        "ko": "바",
-        "nb": "Felt",
-        "nl": "Balk",
-        "pl": "Pasek",
-        "pt-BR": "Barra",
-        "pt-PT": "Barra",
-        "sv": "Fält",
-        "th": "แถบ",
-        "tr": "Çubuk",
-        "vi": "Thanh",
-        "zh-CN": "栏",
-        "zh-TW": "橫條"
-      },
-      "default": "#3a3a3a"
-    },
-    {
-      "type": "color",
-      "id": "color_text",
-      "label": {
-        "cs": "Text",
-        "da": "Tekst",
-        "de": "Text",
-        "en": "Text",
-        "es": "Texto",
-        "fi": "Teksti",
-        "fr": "Texte",
-        "it": "Testo",
-        "ja": "テキスト",
-        "ko": "텍스트",
-        "nb": "Tekst",
-        "nl": "Tekst",
-        "pl": "Tekst",
-        "pt-BR": "Texto",
-        "pt-PT": "Texto",
-        "sv": "Text",
-        "th": "ข้อความ",
-        "tr": "Metin",
-        "vi": "Văn bản",
-        "zh-CN": "文本",
-        "zh-TW": "文字"
-      },
-      "default": "#ffffff"
     }
+
+
+
   ]
 }
 {% endschema %}

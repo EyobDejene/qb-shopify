@@ -725,6 +725,7 @@ window.Parsley.on('field:success', function() {
 
 
 
+
 //
 
 // $('#customer_address').submit(function(event) {

@@ -28,7 +28,7 @@
 
                             <table class="order-table">
                                 <thead>
-                                <tr>
+                                <tr class="pt-3">
                                     <th scope="col">{{ 'customer.order.product' | t }}</th>
                                     <th scope="col">{{ 'customer.order.sku' | t }}</th>
                                     <th class="text-right" scope="col">{{ 'customer.order.price' | t }}</th>
@@ -96,7 +96,7 @@
                                             {%- endif -%}
                                         </th>
                                         <td data-label="{{ 'customer.order.sku' | t }}">{{ line_item.sku }}</td>
-                                        <td class="text-right" data-label="{{ 'customer.order.price' | t }}">
+                                        <td class="text-right pt-3" data-label="{{ 'customer.order.price' | t }}">
                                             <dl>
                                                 {%- if line_item.original_price != line_item.final_price -%}
                                                     <dt>
@@ -209,7 +209,8 @@
 
                                 <tr>
                                     <th class="small--hide" scope="row" colspan="4">{{ 'customer.order.total' | t }}</th>
-                                    <td class="text-right" data-label="{{ 'customer.order.total' | t }}">{{ order.total_price | money_with_currency }}</td>
+                                    <td class="text-right" data-label="{{ 'customer.order.total' | t }}" >
+                                        <b>{{ order.total_price | money_with_currency }}</b></td>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -228,7 +229,8 @@
                             {{ order.billing_address | format_address }}
                              </div>
 
-                            <div class="col-12 col-lg-3 ml-0 ml-lg-2 mt-5" style="border: solid .05rem rgba(0,0,0,.1);
+                            <div class="col-12 col-lg-3 pt-2  ml-0 ml-lg-2 mt-5" style="border: solid .05rem rgba(0,
+                            0,0,.1);
                             text-transform:
                             uppercase;">
                             <strong>{{ 'customer.order.shipping_address' | t }}</strong>

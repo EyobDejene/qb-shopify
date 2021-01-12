@@ -1,3 +1,33 @@
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "@id": "{{ product.url }}",
+        "name": "{{ product.title }}",
+        "image": "{{ product.images[0] | product_img_url: "1536x2048" }}",
+        "description": "{{ product.description | strip_html}}",
+        "url": "{{ product.url }}",
+        "mpn": "{{ product.id }}",
+        "sku": "{% assign current_variant = product.selected_or_first_available_variant %} {{ current_variant.sku }}",
+        "brand": {
+            "@type": "Brand",
+            "name": "Quality Blanks"
+        },
+
+        "offers": {
+            "@type": "Offer",
+            "price": "{{ product.price | money_without_currency}}",
+            "priceCurrency": "{{  cart.currency.iso_code }}",
+            "itemCondition": "http://schema.org/UsedCondition",
+            "availability": "http://schema.org/InStock",
+            "seller": {
+                "@type": "Organization",
+                "name": "Quality Blanks"
+            }
+        }
+    }
+</script>
+
 <!-- PRODUCT ITEM -->
 <div class="col-6 col-lg-3 col-md-4 pt-3  pt-lg-5 pt-md-5 pr-lg-3 pr-md-3">
     <div class="item product">

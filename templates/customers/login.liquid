@@ -14,15 +14,16 @@
                 contains 'email' %} error{% endif %}" placeholder="{{ 'customer.login.email' | t }}" autocorrect="off"
                       autocapitalize="off" autofocus
                       data-parsley-required="true"
-                      data-parsley-type="email"><br>
-
+                      data-parsley-type="email"
+                      data-parsley-error-message="Please insert your email"><br>
             </div>
 
             {% if form.password_needed %}
             <div class="input-group pb-3">
               <label for="password">{{ 'customer.login.password' | t }}</label>
               <input type="password" value="" name="customer[password]" id="CustomerPassword" class="input-full{% if form.errors contains 'password' %} error{% endif %}" placeholder="{{ 'customer.login.password' | t }}"
-                     data-parsley-required="true">
+                     data-parsley-required="true"
+                     data-parsley-error-message="Please insert your password">
             </div>
             {% endif %}
 

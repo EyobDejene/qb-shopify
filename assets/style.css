@@ -315,12 +315,15 @@ aside{
     align-self: flex-start;
 }
 
+aside h2{
+    text-transform: capitalize;
+}
+
 aside ul{
     list-style-type: none;
 }
 
 aside ul li a{
-    text-transform: capitalize;
     font-size: 1em;
     font-weight: 500;
     padding-top: .5rem;
@@ -766,7 +769,7 @@ a#cart__menu:after {
 .offcanvas__inner{
     width: 100%;
     height: 100%;
-    padding: 3rem 1rem;
+    padding: 4rem 1rem;
     display: table;
 }
 
@@ -1232,7 +1235,7 @@ a#cart__menu:after {
     counter-reset: slides-num;
     /* Initialize counter. */
     position: absolute;
-    bottom: -2rem;
+    bottom: -10%;
     top:unset!important;
     width: auto;
     left: .9rem!important;
@@ -1549,7 +1552,9 @@ form input[type="checkbox"]:checked ~ .checkbox__label::before {
 
 }
 
+
 .account table tr{
+    height: 3rem;
     padding-bottom: 1rem;
     font-family: MuseoSans-100;
     font-weight: 100;
@@ -1559,6 +1564,11 @@ form input[type="checkbox"]:checked ~ .checkbox__label::before {
 
 /** END ACCOUNT PAGE **/
 
+
+/** order page **/
+table tbody tr{
+    border:none;
+}
 
 
 
@@ -1651,6 +1661,10 @@ body .shopify-challenge__container .shopify-challenge__message, .shopify-challen
 
 
 /** Parsley error **/
+.errors{
+    padding-top: 1rem;
+    color: black;
+}
 .parsley-errors-list,
 .errors ul,
 .parsley-required{
@@ -1665,7 +1679,7 @@ body .shopify-challenge__container .shopify-challenge__message, .shopify-challen
     /*font-style: italic;*/
     /*position: relative;*/
     /*margin-bottom: -2rem;*/
-    /*display: none;*/
+    display: none;
 }
 
 .parsley-errors-list .parsley-required,
@@ -1679,6 +1693,20 @@ body .shopify-challenge__container .shopify-challenge__message, .shopify-challen
 }
 
 
-.field-error {
-    border-bottom:.15rem solid #ff1800;
+.field-error{
+    background-color: #F9F2F4;
+    color:#c7254e;
+    /*border-bottom:.1rem solid #ff1800;*/
 }
+
+.field-error::placeholder{
+    color:#c7254e;
+}
+
+.group .parsley-error {
+    background-color: #F9F2F4;
+    color:#c7254e;
+    /*border-bottom:.1rem solid #ff1800;*/
+}
+
+

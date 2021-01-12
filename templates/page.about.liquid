@@ -7,3 +7,11 @@
   </section>
 
 <!-- END CONTENT -->
+
+
+<script>
+  // Listen to images after DOM content is fully loaded
+  document.addEventListener('DOMContentLoaded', function () {
+    new Zooming().listen('.content img')
+  })
+</script>

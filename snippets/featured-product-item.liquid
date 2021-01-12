@@ -3,6 +3,37 @@
 
 {% for product in collections.all.products %}
     {% if product.tags contains 'featured' %}
+
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org/",
+                "@type": "Product",
+                "@id": "{{ product.url }}",
+                "name": "{{ product.title }}",
+                "image": "{{ product.images[0] | product_img_url: "1536x2048" }}",
+                "description": "{{ product.description | strip_html}}",
+                "url": "{{ product.url }}",
+                "mpn": "{{ product.id }}",
+                "sku": "{% assign current_variant = product.selected_or_first_available_variant %} {{ current_variant.sku }}",
+                "brand": {
+                    "@type": "Brand",
+                    "name": "Quality Blanks"
+                },
+
+                "offers": {
+                    "@type": "Offer",
+                    "price": "{{ product.price | money_without_currency}}",
+                    "priceCurrency": "{{  cart.currency.iso_code }}",
+                    "itemCondition": "http://schema.org/UsedCondition",
+                    "availability": "http://schema.org/InStock",
+                    "seller": {
+                        "@type": "Organization",
+                        "name": "Quality Blanks"
+                    }
+                }
+            }
+        </script>
+
         <div class="col-12 col-md-6 p-0">
             <div class="featuredProduct__image">
                 <img class="img-fluid" src="{{ product.images[0] | product_img_url: "1536x2048" }}" alt="{{product.title }}" title="{{ product.title }}">

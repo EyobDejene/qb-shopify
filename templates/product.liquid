@@ -1,3 +1,37 @@
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "@id": "{{ product.url }}",
+    "name": "{{ product.title }}",
+    "image": "{{ product.images[0] | product_img_url: "1536x2048" }}",
+    "description": "{{ product.description | strip_html}}",
+    "url": "{{ product.url }}",
+    "mpn": "{{ product.id }}",
+    "sku": "{% assign current_variant = product.selected_or_first_available_variant %} {{ current_variant.sku }}",
+    "brand": {
+      "@type": "Brand",
+      "name": "Quality Blanks"
+    },
+
+    "offers": {
+      "@type": "Offer",
+      "price": "{{ product.price | money_without_currency}}",
+      "priceCurrency": "{{  cart.currency.iso_code }}",
+      "itemCondition": "http://schema.org/UsedCondition",
+      "availability": "http://schema.org/InStock",
+      "seller": {
+        "@type": "Organization",
+        "name": "Quality Blanks"
+      }
+    }
+  }
+</script>
+
+<!--end snippets -->
+
+
+
 <!-- START PRODUCT DETAIL -->
 <section class="productDetail pt-5 pb-5">
   <div class="container-fluid">
@@ -16,7 +50,7 @@
 
             {% for image in product.images %}
               <div class="col-6 p-0 pr-2 pb-2">
-                <img src="{{ image.src | product_img_url: '1536x2048' }}" class="img-fluid" alt="{{ product.title }}">
+                <img src="{{ image.src | product_img_url: '1536x2048' }}" class="img-fluid img-zoomable" alt="{{ product.title }}">
               </div>
             {% endfor %}
 
@@ -34,7 +68,8 @@
               {% for image in product.images %}
                 <div class="item d-flex align-items-center cover">
                   <div class="col-12 static p-0">
-                    <img src="{{ image.src | product_img_url: '1536x2048' }}" class="img-fluid" alt="{{ product.title }}">
+                    <img src="{{ image.src | product_img_url: '1536x2048' }}" class="img-fluid" alt="{{ product
+                    .title }}">
                   </div>
                 </div>
               {% endfor %}
@@ -76,13 +111,13 @@
           </div>
 
           <!-- start product variants -->
-          <ul class="product__variants pt-3">
+         <!-- <ul class="product__variants pt-3">
             <li><a href="https://qualityblanks.com/collections/longsleeves/products/qb51-longsleeve-polo-black"></a></li>
             <li><a href="https://qualityblanks.com/collections/longsleeves/products/qb51-longsleeve-polo-burgundy-red"></a></li>
             <li><a href="https://qualityblanks.com/collections/longsleeves/products/qb51-longsleeve-polo-dark-sapphire"></a></li>
             <li><a href="https://qualityblanks.com/collections/longsleeves/products/qb51-longsleeve-polo-dark-teal"></a></li>
             <li><a href="https://qualityblanks.com/collections/longsleeves/products/qb51-longsleeve-polo-white"></a></li>
-          </ul>
+          </ul> -->
           <!-- end product variants -->
 
 
@@ -148,14 +183,108 @@
           </div>
 
 
-          <div class="accordion">
+
+
+          <div class="accordion ">
             <div class="accordion__title">
               <strong>Size and fit <span class="float-right">+</span></strong>
             </div>
             <div class="accordion__content mt-3">
-              <table class="esc-size-guide--table"><tr class="esc-size-guide--row"><th class="esc-size-guide--heading esc-size-guide--col1 esc-size-guide--row1"><span class="esc-size-guide--cell-type--text">Size:</span></th><td class="esc-size-guide--cell esc-size-guide--col2 esc-size-guide--row1"><span class="esc-size-guide--cell-type--text">S</span></td><td class="esc-size-guide--cell esc-size-guide--col3 esc-size-guide--row1"><span class="esc-size-guide--cell-type--text">M</span></td><td class="esc-size-guide--cell esc-size-guide--col4 esc-size-guide--row1"><span class="esc-size-guide--cell-type--text">L</span></td><td class="esc-size-guide--cell esc-size-guide--col5 esc-size-guide--row1"><span class="esc-size-guide--cell-type--text">XL</span></td></tr><tr class="esc-size-guide--row"><th class="esc-size-guide--heading esc-size-guide--col1 esc-size-guide--row2"><span class="esc-size-guide--cell-type--text">1/2 Chest</span></th><td class="esc-size-guide--cell esc-size-guide--col2 esc-size-guide--row2"><span class="esc-size-guide--cell-type--text">51</span></td><td class="esc-size-guide--cell esc-size-guide--col3 esc-size-guide--row2"><span class="esc-size-guide--cell-type--text">54</span></td><td class="esc-size-guide--cell esc-size-guide--col4 esc-size-guide--row2"><span class="esc-size-guide--cell-type--text">57</span></td><td class="esc-size-guide--cell esc-size-guide--col5 esc-size-guide--row2"><span class="esc-size-guide--cell-type--text">60</span></td></tr><tr class="esc-size-guide--row"><th class="esc-size-guide--heading esc-size-guide--col1 esc-size-guide--row3"><span class="esc-size-guide--cell-type--text">Length</span></th><td class="esc-size-guide--cell esc-size-guide--col2 esc-size-guide--row3"><span class="esc-size-guide--cell-type--text">72</span></td><td class="esc-size-guide--cell esc-size-guide--col3 esc-size-guide--row3"><span class="esc-size-guide--cell-type--text">74</span></td><td class="esc-size-guide--cell esc-size-guide--col4 esc-size-guide--row3"><span class="esc-size-guide--cell-type--text">76</span></td><td class="esc-size-guide--cell esc-size-guide--col5 esc-size-guide--row3"><span class="esc-size-guide--cell-type--text">78</span></td></tr><tr class="esc-size-guide--row"><th class="esc-size-guide--heading esc-size-guide--col1 esc-size-guide--row4"><span class="esc-size-guide--cell-type--text">Sleeve Length</span></th><td class="esc-size-guide--cell esc-size-guide--col2 esc-size-guide--row4"><span class="esc-size-guide--cell-type--text">64</span></td><td class="esc-size-guide--cell esc-size-guide--col3 esc-size-guide--row4"><span class="esc-size-guide--cell-type--text">66</span></td><td class="esc-size-guide--cell esc-size-guide--col4 esc-size-guide--row4"><span class="esc-size-guide--cell-type--text">68</span></td><td class="esc-size-guide--cell esc-size-guide--col5 esc-size-guide--row4"><span class="esc-size-guide--cell-type--text">70</span></td></tr></table>
+              <p>
+
+                {%  if product.type ==  "Longsleeves" %}
+              <table class="esc-size-guide--table">
+                <tbody>
+                <tr class="esc-size-guide--row">
+                  <th class="esc-size-guide--heading esc-size-guide--col1 esc-size-guide--row1"><span class="esc-size-guide--cell-type--text">Size:</span></th>
+                  <td class="esc-size-guide--cell esc-size-guide--col2 esc-size-guide--row1"><span class="esc-size-guide--cell-type--text">S</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col3 esc-size-guide--row1"><span class="esc-size-guide--cell-type--text">M</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col4 esc-size-guide--row1"><span class="esc-size-guide--cell-type--text">L</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col5 esc-size-guide--row1"><span class="esc-size-guide--cell-type--text">XL</span></td>
+                </tr>
+                <tr class="esc-size-guide--row">
+                  <th class="esc-size-guide--heading esc-size-guide--col1 esc-size-guide--row2"><span class="esc-size-guide--cell-type--text">1/2 Chest</span></th>
+                  <td class="esc-size-guide--cell esc-size-guide--col2 esc-size-guide--row2"><span class="esc-size-guide--cell-type--text">51</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col3 esc-size-guide--row2"><span class="esc-size-guide--cell-type--text">54</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col4 esc-size-guide--row2"><span class="esc-size-guide--cell-type--text">57</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col5 esc-size-guide--row2"><span class="esc-size-guide--cell-type--text">60</span></td>
+                </tr>
+                <tr class="esc-size-guide--row">
+                  <th class="esc-size-guide--heading esc-size-guide--col1 esc-size-guide--row3"><span class="esc-size-guide--cell-type--text">Length</span></th>
+                  <td class="esc-size-guide--cell esc-size-guide--col2 esc-size-guide--row3"><span class="esc-size-guide--cell-type--text">72</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col3 esc-size-guide--row3"><span class="esc-size-guide--cell-type--text">74</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col4 esc-size-guide--row3"><span class="esc-size-guide--cell-type--text">76</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col5 esc-size-guide--row3"><span class="esc-size-guide--cell-type--text">78</span></td>
+                </tr>
+                <tr class="esc-size-guide--row">
+                  <th class="esc-size-guide--heading esc-size-guide--col1 esc-size-guide--row4"><span class="esc-size-guide--cell-type--text">Sleeve Length</span></th>
+                  <td class="esc-size-guide--cell esc-size-guide--col2 esc-size-guide--row4"><span class="esc-size-guide--cell-type--text">64</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col3 esc-size-guide--row4"><span class="esc-size-guide--cell-type--text">66</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col4 esc-size-guide--row4"><span class="esc-size-guide--cell-type--text">68</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col5 esc-size-guide--row4"><span class="esc-size-guide--cell-type--text">70</span></td>
+                </tr>
+                </tbody>
+              </table>
+                {%  endif %}
+
+                {%  if product.type ==  "Onderbroeken" %}
+
+                {%  endif %}
+
+                {%  if product.type ==  "Petten" %}
+
+
+
+                {%  endif %}
+
+                {%  if product.type ==  "T-shirts" %}
+
+              <table class="esc-size-guide--table">
+                <tbody>
+                <tr class="esc-size-guide--row">
+                  <th class="esc-size-guide--heading esc-size-guide--col1 esc-size-guide--row1"><span class="esc-size-guide--cell-type--text">Size:</span></th>
+                  <td class="esc-size-guide--cell esc-size-guide--col2 esc-size-guide--row1"><span class="esc-size-guide--cell-type--text">S</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col3 esc-size-guide--row1"><span class="esc-size-guide--cell-type--text">M</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col4 esc-size-guide--row1"><span class="esc-size-guide--cell-type--text">L</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col5 esc-size-guide--row1"><span class="esc-size-guide--cell-type--text">XL</span></td>
+                </tr>
+                <tr class="esc-size-guide--row">
+                  <th class="esc-size-guide--heading esc-size-guide--col1 esc-size-guide--row2"><b>1/2 Chest</b></th>
+                  <td class="esc-size-guide--cell esc-size-guide--col2 esc-size-guide--row2"><span class="esc-size-guide--cell-type--text">51</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col3 esc-size-guide--row2"><span class="esc-size-guide--cell-type--text">54</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col4 esc-size-guide--row2"><span class="esc-size-guide--cell-type--text">57</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col5 esc-size-guide--row2"><span class="esc-size-guide--cell-type--text">60</span></td>
+                </tr>
+                <tr class="esc-size-guide--row">
+                  <th class="esc-size-guide--heading esc-size-guide--col1 esc-size-guide--row3"><span class="esc-size-guide--cell-type--text">Length</span></th>
+                  <td class="esc-size-guide--cell esc-size-guide--col2 esc-size-guide--row3"><span class="esc-size-guide--cell-type--text">72</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col3 esc-size-guide--row3"><span class="esc-size-guide--cell-type--text">74</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col4 esc-size-guide--row3"><span class="esc-size-guide--cell-type--text">76</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col5 esc-size-guide--row3"><span class="esc-size-guide--cell-type--text">78</span></td>
+                </tr>
+                <tr class="esc-size-guide--row">
+                  <th class="esc-size-guide--heading esc-size-guide--col1 esc-size-guide--row4"><span class="esc-size-guide--cell-type--text">Sleeve Length</span></th>
+                  <td class="esc-size-guide--cell esc-size-guide--col2 esc-size-guide--row4"><span class="esc-size-guide--cell-type--text">64</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col3 esc-size-guide--row4"><span class="esc-size-guide--cell-type--text">66</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col4 esc-size-guide--row4"><span class="esc-size-guide--cell-type--text">68</span></td>
+                  <td class="esc-size-guide--cell esc-size-guide--col5 esc-size-guide--row4"><span class="esc-size-guide--cell-type--text">70</span></td>
+                </tr>
+                </tbody>
+              </table>
+              {%  endif %}
+              </p>
             </div>
           </div>
+
+
+
+
+
+
+
+
+
+
 
           <div class="accordion">
             <div class="accordion__title">
@@ -166,6 +295,7 @@
                 warehouse must be paid by the customer. Please ensure that all items are returned clean,
                 unworn and have all of their tags and original packaging.
                 <br>Underwear can not be returned.
+              </p>
             </div>
           </div>
 
@@ -183,3 +313,5 @@
 
 
 <!-- END PRODUCT DETAIL -->
+
+

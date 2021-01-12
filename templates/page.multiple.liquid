@@ -6,13 +6,12 @@
         <aside>
           <h2>INFO</h2>
           <ul>
-            <li><a href="/pages/contact"{%  if page.url == '/pages/contact' %}class="active"{% endif %}>Contact</a></li>
-            <li><a href="/pages/shipping"{%  if page.url == '/pages/shipping' %}class="active"{% endif %}>Shipping</a></li>
-            <li><a href="/pages/returns"{%  if page.url == '/pages/returns' %}class="active"{% endif
-              %}>Returns</a></li>
-            <li><a href="/pages/size-chart"{%  if page.url == '/pages/size-chart' %}class="active"{% endif
-              %}>Sizechart</a></li>
-            <li><a href="/pages/faq"{%  if page.url == '/pages/faq' %}class="active"{% endif %} >FAQ</a></li>
+            {% for link in linklists.content-menu.links %}
+              <li><a href="{{  link.url }}" {%  if page.url == link.url %}class="active"{% endif %}>{{  link.title }}</a></li>
+            {% endfor %}
+
+
+
           </ul>
         </aside>
       </div>
